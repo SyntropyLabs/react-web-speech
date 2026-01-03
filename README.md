@@ -1,2 +1,2 @@
 # react-web-speech
-More than just a convinence wrapper around the Web Speech API
+A React library for the Web Speech API with first-class DX: mic permissions, listening states, browser compatibility, and cursor-aware text insertion.

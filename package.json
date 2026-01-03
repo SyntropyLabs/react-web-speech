@@ -1,5 +1,5 @@
 {
-  "name": "react-web-speech",
+  "name": "@syntropy-labs/react-web-speech",
   "version": "0.0.1",
   "type": "module",
   "description": "A React library for the Web Speech API with first-class DX: mic permissions, listening states, browser compatibility, and cursor-aware text insertion.",

@@ -1,25 +1,69 @@
 {
   "name": "react-web-speech",
-  "type": "module",
   "version": "0.0.1",
-  "private": true,
+  "type": "module",
   "description": "A React library for the Web Speech API with first-class DX: mic permissions, listening states, browser compatibility, and cursor-aware text insertion.",
+  "author": "SyntropyLabs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyntropyLabs/react-web-speech.git"
+  },
+  "homepage": "https://github.com/SyntropyLabs/react-web-speech#readme",
+  "bugs": {
+    "url": "https://github.com/SyntropyLabs/react-web-speech/issues"
+  },
+  "keywords": [
+    "react",
+    "speech",
+    "speech-to-text",
+    "speech-recognition",
+    "web-speech-api",
+    "voice",
+    "microphone",
+    "hooks",
+    "typescript"
+  ],
+  "sideEffects": false,
   "exports": {
-    ".": "./dist/index.mjs",
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch"
+    "dev": "tsdown --watch",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
     "tsdown": "^0.18.1",
     "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

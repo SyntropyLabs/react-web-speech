@@ -54,8 +54,11 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@rollup/plugin-babel": "^6.1.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "babel-plugin-react-compiler": "^1.0.0",
     "react": "^19.0.0",
     "tsdown": "^0.18.1",
     "typescript": "^5.9.3"

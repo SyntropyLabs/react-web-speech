@@ -25,6 +25,8 @@ export default [
         window: 'readonly',
         document: 'readonly',
         navigator: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
         Event: 'readonly',
         EventTarget: 'readonly',
         DOMException: 'readonly',

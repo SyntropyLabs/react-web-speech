@@ -20,6 +20,23 @@ export default [
           jsx: true,
         },
       },
+      globals: {
+        // Browser globals
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        Event: 'readonly',
+        EventTarget: 'readonly',
+        DOMException: 'readonly',
+        PermissionStatus: 'readonly',
+        PermissionName: 'readonly',
+        SpeechRecognition: 'readonly',
+        SpeechRecognitionEvent: 'readonly',
+        SpeechRecognitionErrorEvent: 'readonly',
+        SpeechRecognitionResult: 'readonly',
+        SpeechRecognitionResultList: 'readonly',
+        SpeechRecognitionAlternative: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': tseslint,

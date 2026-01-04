@@ -14,7 +14,7 @@ export type {
   BrowserCapabilities,
   RecognitionOptions,
   RecognitionCallbacks,
-  // Hook types (for Phase 2)
+  // Hook types
   UseSpeechInputOptions,
   UseSpeechInputReturn,
 } from './types'
@@ -46,10 +46,24 @@ export {
 export { createRecognitionInstance, getErrorMessage, mapErrorType } from './core/recognition'
 
 // ============================================================================
+// Cursor Utilities
+// ============================================================================
+
+export {
+  type CursorPosition,
+  supportsSelection,
+  getCursorPosition,
+  setCursorPosition,
+  insertTextAtCursor,
+} from './utils'
+
+// ============================================================================
 // Hooks
 // ============================================================================
 
-export { useSpeechInput } from './hooks'
+export { useSpeechInput, useSpeechInputWithCursor } from './hooks'
+
+export type { UseSpeechInputWithCursorOptions, UseSpeechInputWithCursorReturn } from './hooks'
 
 // ============================================================================
 // Version

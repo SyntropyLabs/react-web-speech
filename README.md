@@ -10,10 +10,11 @@
 - 🎙️ **Mic permission state management** — Know if permission is `prompt`, `granted`, or `denied`
 - 📝 **Cursor-aware text insertion** — Insert transcribed text at cursor position
 - 🔇 **Auto-silence detection** — Automatically stop listening after silence
+- 🔄 **Auto-restart on network errors** — Resilient to connection issues
 - 🌐 **Browser compatibility** — Handles Chrome, Edge, Safari with proper prefixing
-- 📦 **Tree-shakeable** — Only bundle what you use (<3KB gzipped)
+- 📦 **Tree-shakeable** — Only bundle what you use (~5KB gzipped)
 - 🔷 **TypeScript-first** — Full type safety and IDE autocomplete
-- ⚛️ **React Compiler optimized** — Pre-optimized with React Compiler
+- ⚛️ **React 18+ ready** — Strict Mode compatible
 
 ## Installation
 
@@ -74,9 +75,13 @@ The primary hook for speech-to-text functionality.
 | `lang` | `string` | `navigator.language` | Recognition language (e.g., 'en-US') |
 | `continuous` | `boolean` | `false` | Keep listening after pause |
 | `interimResults` | `boolean` | `true` | Show real-time partial results |
-| `silenceTimeout` | `number` | `3000` | Auto-stop after silence (ms) |
-| `onResult` | `(text: string, isFinal: boolean) => void` | - | Callback on speech result |
-| `onError` | `(error: SpeechError) => void` | - | Callback on error |
+| `maxAlternatives` | `number` | `1` | Max alternative transcriptions |
+| `silenceTimeout` | `number` | `3000` | Auto-stop after silence (ms), 0 to disable |
+| `autoRestart` | `boolean` | `false` | Auto-restart on network errors |
+| `onResult` | `(text, isFinal) => void` | - | Callback on speech result |
+| `onError` | `(error) => void` | - | Callback on error |
+| `onStart` | `() => void` | - | Callback when listening starts |
+| `onEnd` | `() => void` | - | Callback when listening ends |
 
 #### Returns
 
@@ -89,16 +94,21 @@ The primary hook for speech-to-text functionality.
 | `permissionState` | `'prompt' \| 'granted' \| 'denied' \| 'unsupported'` | Mic permission state |
 | `error` | `SpeechError \| null` | Error details |
 | `start` | `() => Promise<void>` | Start listening |
-| `stop` | `() => void` | Stop listening |
+| `stop` | `() => void` | Stop listening gracefully |
+| `abort` | `() => void` | Abort listening immediately |
 | `toggle` | `() => Promise<void>` | Toggle listening |
-| `clear` | `() => void` | Clear transcript |
+| `clear` | `() => void` | Clear transcript and error |
+| `requestPermission` | `() => Promise<MicPermissionState>` | Request mic permission |
+
+---
 
 ### `useSpeechInputWithCursor(options)`
 
-Extended hook for cursor-aware text insertion.
+Extended hook that automatically inserts transcribed text at the cursor position.
 
 ```tsx
 import { useSpeechInputWithCursor } from '@syntropy-labs/react-web-speech'
+import { useState, useRef } from 'react'
 
 function VoiceTextarea() {
   const [value, setValue] = useState('')
@@ -108,7 +118,7 @@ function VoiceTextarea() {
     inputRef,
     value,
     onChange: setValue,
-    appendSpace: true,
+    appendSpace: true, // Add space after inserted text
   })
 
   return (
@@ -119,6 +129,52 @@ function VoiceTextarea() {
   )
 }
 ```
+
+#### Additional Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `inputRef` | `RefObject<HTMLInputElement \| HTMLTextAreaElement>` | **required** | Ref to the input element |
+| `value` | `string` | **required** | Current controlled value |
+| `onChange` | `(value: string) => void` | **required** | Value setter |
+| `appendSpace` | `boolean` | `true` | Add space after inserted text |
+
+#### Additional Returns
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `insertAtCursor` | `(text: string) => void` | Manually insert text at cursor |
+
+---
+
+### Cursor Utilities
+
+Low-level utilities for cursor position management:
+
+```tsx
+import { 
+  supportsSelection,
+  getCursorPosition,
+  setCursorPosition,
+  insertTextAtCursor 
+} from '@syntropy-labs/react-web-speech'
+
+// Check if input type supports cursor APIs
+supportsSelection(inputElement) // true for text, search, tel, password, url
+
+// Get current cursor position
+const { start, end } = getCursorPosition(inputElement)
+
+// Set cursor position (uses requestAnimationFrame for React compatibility)
+setCursorPosition(inputElement, position, { focus: true })
+
+// Insert text at cursor in controlled input
+insertTextAtCursor(inputRef, 'hello', currentValue, setValue)
+```
+
+> **Note:** `email` and `number` input types don't support cursor APIs. The utilities fall back to appending text at the end.
+
+---
 
 ## Browser Support
 
@@ -136,12 +192,13 @@ function VoiceTextarea() {
 Existing React speech-to-text packages lack critical production-ready features:
 
 | Feature | Other Packages | This Package |
-|---------|---------------|--------------|
+|---------|---------------|--------------| 
 | Mic permission state | ❌ | ✅ |
 | Insert text at cursor | ❌ | ✅ |
 | Auto-silence detection | ❌ | ✅ |
+| Auto-restart on errors | ❌ | ✅ |
 | TypeScript-first | Varies | ✅ |
-| React Compiler support | ❌ | ✅ |
+| React 18 Strict Mode | ❌ | ✅ |
 
 ## Contributing
 
@@ -155,13 +212,17 @@ cd react-web-speech
 # Install dependencies
 yarn install
 
-# Start development
-yarn dev
-
 # Run tests
 yarn test
+
+# Type check
+yarn typecheck
+
+# Build
+yarn build
 ```
 
 ## License
 
 MIT © [SyntropyLabs](https://github.com/SyntropyLabs)
+

@@ -10,15 +10,16 @@ export default defineConfig({
   treeshake: true,
   exports: true,
   external: ['react', 'react-dom'],
+  fixedExtension: true,
   plugins: [
     pluginBabel({
       babelHelpers: 'bundled',
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       parserOpts: {
         sourceType: 'module',
         plugins: ['jsx', 'typescript'],
       },
       plugins: ['babel-plugin-react-compiler'],
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
   ],
 })

@@ -76,11 +76,25 @@ header a:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.badge.granted { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
-.badge.denied { background: rgba(255, 71, 87, 0.2); color: #ff4757; }
-.badge.prompt { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
-.badge.listening { background: rgba(255, 71, 87, 0.2); color: #ff4757; }
-.badge.idle { background: rgba(255, 255, 255, 0.1); }
+.badge.granted {
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+}
+.badge.denied {
+  background: rgba(255, 71, 87, 0.2);
+  color: #ff4757;
+}
+.badge.prompt {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+.badge.listening {
+  background: rgba(255, 71, 87, 0.2);
+  color: #ff4757;
+}
+.badge.idle {
+  background: rgba(255, 255, 255, 0.1);
+}
 
 .transcript-box {
   background: rgba(0, 0, 0, 0.3);

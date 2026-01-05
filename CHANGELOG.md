@@ -1,5 +1,13 @@
 # @syntropy-labs/react-web-speech
 
+## 0.1.2
+
+### Patch Changes
+
+- 32d5f73: ### Bug Fix
+  - Fixed React 18 compatibility issue by removing React Compiler from production build
+  - The React Compiler runtime is only available in React 19+
+
 ## 0.1.1
 
 ### Patch Changes

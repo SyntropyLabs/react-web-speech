@@ -1,4 +1,3 @@
-import pluginBabel from '@rollup/plugin-babel'
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
@@ -11,15 +10,4 @@ export default defineConfig({
   exports: true,
   external: ['react', 'react-dom'],
   fixedExtension: true,
-  plugins: [
-    pluginBabel({
-      babelHelpers: 'bundled',
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      parserOpts: {
-        sourceType: 'module',
-        plugins: ['jsx', 'typescript'],
-      },
-      plugins: ['babel-plugin-react-compiler'],
-    }),
-  ],
 })

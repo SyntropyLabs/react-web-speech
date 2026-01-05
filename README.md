@@ -15,7 +15,7 @@
 - 🌐 **Browser compatibility** — Handles Chrome, Edge, Safari with proper prefixing
 - 📦 **Tree-shakeable** — Only bundle what you use (~5KB gzipped)
 - 🔷 **TypeScript-first** — Full type safety and IDE autocomplete
-- ⚛️ **React 18+ ready** — Strict Mode compatible
+- ⚛️ **React 17+ ready** — Strict Mode compatible
 
 ## Installation
 

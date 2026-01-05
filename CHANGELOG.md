@@ -1,5 +1,13 @@
 # @syntropy-labs/react-web-speech
 
+## 0.1.1
+
+### Patch Changes
+
+- 1c297c4: ### Patch Release (v0.1.1)
+  - Added provenance attestation for npm package verification
+  - Improved changelog configuration
+
 ## 0.1.0
 
 ### Minor Changes

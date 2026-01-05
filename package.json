@@ -43,7 +43,7 @@
     "prepublishOnly": "yarn build",
     "prepare": "husky",
     "changeset": "changeset",
-    "version": "changeset version",
+    "changeset:version": "changeset version",
     "release": "yarn build && changeset publish"
   },
   "peerDependencies": {

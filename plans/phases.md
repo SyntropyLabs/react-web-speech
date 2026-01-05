@@ -838,11 +838,11 @@ Create a `/examples` directory with:
 
 ---
 
-## Phase 6: Quality Assurance & Release
+## Phase 5: Quality Assurance & Release
 
 **Goal:** Ensure production readiness and publish to npm.
 
-### 6.1 Testing Strategy
+### 5.1 Testing Strategy
 
 | Test Type | Tool | Coverage |
 |-----------|------|----------|
@@ -851,7 +851,7 @@ Create a `/examples` directory with:
 | Component tests | @testing-library/react | Rendering, accessibility |
 | E2E tests | Playwright | Real browser speech API (Chrome required) |
 
-### 6.2 Pre-Release Checklist
+### 5.2 Pre-Release Checklist
 
 - [ ] All tests passing
 - [ ] >80% code coverage
@@ -863,14 +863,14 @@ Create a `/examples` directory with:
 - [ ] All exports documented
 - [ ] CHANGELOG.md updated
 
-### 6.3 Release Process
+### 5.3 Release Process
 
 1. Create changeset: `npx changeset`
 2. Version packages: `npx changeset version`
 3. Build: `npm run build`
 4. Publish: `npm publish`
 
-### 6.4 Post-Release
+### 5.4 Post-Release
 
 - [ ] Verify npm package is accessible
 - [ ] Test installation in fresh project
@@ -893,9 +893,8 @@ Create a `/examples` directory with:
 | **Phase 1** | Core Speech Recognition Engine | 2-3 days |
 | **Phase 2** | Primary Hook Implementation | 2-3 days |
 | **Phase 3** | Cursor Insertion Utility | 1 day |
-| **Phase 4** | Optional UI Components | 1-2 days |
-| **Phase 5** | Documentation & Examples | 2-3 days |
-| **Phase 6** | Quality Assurance & Release | 1-2 days |
+| **Phase 4** | Documentation & Examples | 2-3 days |
+| **Phase 5** | Quality Assurance & Release | 1-2 days |
 
 **Total Estimated Time: 10-16 days**
 

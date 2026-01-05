@@ -789,7 +789,7 @@ export function useSpeechInputWithCursor(
 
 **Goal:** Create comprehensive documentation and example applications.
 
-### 5.1 README.md Structure
+### 4.1 README.md Structure
 
 ```markdown
 # @syntropy-labs/react-web-speech
@@ -816,14 +816,14 @@ export function useSpeechInputWithCursor(
 ## License
 ```
 
-### 5.2 Example Application
+### 4.2 Example Application
 
 Create a `/examples` directory with:
 - `examples/basic/` — Minimal React + Vite app
 - `examples/nextjs/` — Next.js App Router integration
 - `examples/form/` — Complex form with speech input
 
-### 5.3 API Documentation
+### 4.3 API Documentation
 
 - JSDoc comments on all exports
 - TypeDoc-generated API reference

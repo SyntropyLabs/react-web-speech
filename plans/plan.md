@@ -33,8 +33,6 @@ react-web-speech/
 │   ├── index.ts              # Main exports
 │   ├── hooks/
 │   │   └── useSpeechInput.ts # Primary hook
-│   ├── components/
-│   │   └── SpeechButton.tsx  # Optional composable UI
 │   ├── core/
 │   │   ├── recognition.ts    # Web Speech API wrapper
 │   │   ├── permissions.ts    # Mic permission handling
@@ -308,12 +306,7 @@ export default defineConfig({
 3. Error handling with typed errors
 4. Configurable options (lang, continuous, etc.)
 
-### Phase 4: Optional Components (Week 3)
-1. `SpeechButton` composable component
-2. Example/demo app
-3. Storybook documentation
-
-### Phase 5: Polish & Release (Week 4)
+### Phase 4: Polish & Release (Week 3-4)
 1. Comprehensive tests
 2. Documentation and README
 3. npm publish and GitHub release

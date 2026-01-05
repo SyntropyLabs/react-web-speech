@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@syntropy-labs/react-web-speech": "^0.1.1",
+    "@syntropy-labs/react-web-speech": "^0.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

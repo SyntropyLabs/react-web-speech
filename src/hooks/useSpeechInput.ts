@@ -107,13 +107,6 @@ export function useSpeechInput(options: UseSpeechInputOptions = {}): UseSpeechIn
     }
   }, [silenceTimeout, clearSilenceTimeout])
 
-  // Reset silence timeout (checks isListening for safety in other contexts)
-  const resetSilenceTimeout = useCallback(() => {
-    if (isListening) {
-      startSilenceTimeout()
-    }
-  }, [isListening, startSilenceTimeout])
-
   // Clear timeout when not listening
   useEffect(() => {
     if (!isListening) {
@@ -143,7 +136,8 @@ export function useSpeechInput(options: UseSpeechInputOptions = {}): UseSpeechIn
             setInterimTranscript(text)
           }
           onResult?.(text, isFinal)
-          resetSilenceTimeout()
+          // Reset silence timeout on every result (both interim and final)
+          startSilenceTimeout()
         },
         onError: (err) => {
           setError(err)
@@ -164,7 +158,7 @@ export function useSpeechInput(options: UseSpeechInputOptions = {}): UseSpeechIn
           setIsListening(true)
           setError(null)
           shouldRestartRef.current = false
-          startSilenceTimeout()
+          // Don't start silence timeout here - wait for speech to end
           onStart?.()
         },
         onEnd: () => {
@@ -182,10 +176,12 @@ export function useSpeechInput(options: UseSpeechInputOptions = {}): UseSpeechIn
           }
         },
         onSpeechStart: () => {
-          resetSilenceTimeout()
+          // Clear timeout while speaking
+          clearSilenceTimeout()
         },
         onSpeechEnd: () => {
-          resetSilenceTimeout()
+          // Start timeout after speech ends
+          startSilenceTimeout()
         },
       }
     )
@@ -200,7 +196,6 @@ export function useSpeechInput(options: UseSpeechInputOptions = {}): UseSpeechIn
     onStart,
     onEnd,
     startSilenceTimeout,
-    resetSilenceTimeout,
     clearSilenceTimeout,
   ])
 

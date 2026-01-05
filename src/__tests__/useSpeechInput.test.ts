@@ -359,6 +359,11 @@ describe('useSpeechInput', () => {
         mockInstance.onstart?.(new Event('start'))
       })
 
+      // Simulate speech ending (silence begins, timeout starts)
+      act(() => {
+        mockInstance.onspeechend?.(new Event('speechend'))
+      })
+
       // Fast-forward past silence timeout
       act(() => {
         vi.advanceTimersByTime(3000)

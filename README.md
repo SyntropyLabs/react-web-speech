@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@syntropy-labs/react-web-speech.svg)](https://www.npmjs.com/package/@syntropy-labs/react-web-speech)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/SyntropyLabs/react-web-speech/tree/main/sandbox?file=src%2FApp.tsx)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/SyntropyLabs/react-web-speech/tree/main/examples/playground?file=src%2FApp.tsx)
 
 ## Features
 

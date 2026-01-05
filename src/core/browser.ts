@@ -6,10 +6,17 @@ import type { BrowserCapabilities, SpeechRecognitionInstance } from '../types'
 let cachedCapabilities: BrowserCapabilities | null = null
 
 /**
- * Detect browser capabilities for Web Speech API
- * Results are cached for performance
+ * Detect browser capabilities for Web Speech API.
+ * Results are cached for performance.
  *
  * @returns Browser capabilities object
+ * @example
+ * ```ts
+ * const caps = detectBrowserCapabilities()
+ * if (!caps.isSupported) {
+ *   console.log('Speech API not supported')
+ * }
+ * ```
  */
 export function detectBrowserCapabilities(): BrowserCapabilities {
   // Return cached result if available
@@ -78,8 +85,16 @@ export function clearCapabilitiesCache(): void {
 }
 
 /**
- * Check if the current browser has known issues with Speech API
+ * Check if the current browser has known issues with Speech API.
+ *
  * @returns Warning message if issues exist, null otherwise
+ * @example
+ * ```ts
+ * const warning = getBrowserCompatibilityWarning()
+ * if (warning) {
+ *   console.warn(warning)
+ * }
+ * ```
  */
 export function getBrowserCompatibilityWarning(): string | null {
   const { browserName, isSupported } = detectBrowserCapabilities()

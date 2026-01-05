@@ -187,6 +187,180 @@ insertTextAtCursor(inputRef, 'hello', currentValue, setValue)
 
 > **Note:** The Web Speech API requires HTTPS in production (except localhost).
 
+---
+
+## SSR / Next.js
+
+This package is SSR-safe. The Web Speech API is only accessed on the client.
+
+### Next.js App Router
+
+```tsx
+'use client'
+
+import { useSpeechInput } from '@syntropy-labs/react-web-speech'
+
+export function VoiceButton() {
+  const { isListening, toggle, isSupported } = useSpeechInput()
+  
+  if (!isSupported) return null
+  
+  return (
+    <button onClick={toggle}>
+      {isListening ? 'Stop' : 'Speak'}
+    </button>
+  )
+}
+```
+
+### Next.js Pages Router
+
+```tsx
+import dynamic from 'next/dynamic'
+
+const VoiceInput = dynamic(
+  () => import('../components/VoiceInput'),
+  { ssr: false }
+)
+```
+
+---
+
+## TypeScript
+
+All types are exported:
+
+```tsx
+import type {
+  UseSpeechInputOptions,
+  UseSpeechInputReturn,
+  UseSpeechInputWithCursorOptions,
+  UseSpeechInputWithCursorReturn,
+  SpeechError,
+  SpeechErrorType,
+  MicPermissionState,
+  CursorPosition,
+  BrowserCapabilities,
+} from '@syntropy-labs/react-web-speech'
+```
+
+---
+
+## Advanced Examples
+
+### Voice-controlled Form
+
+```tsx
+import { useState, useRef } from 'react'
+import { useSpeechInputWithCursor } from '@syntropy-labs/react-web-speech'
+
+function VoiceForm() {
+  const [formData, setFormData] = useState({ name: '', email: '' })
+  const [activeField, setActiveField] = useState<'name' | 'email'>('name')
+  const inputRefs = {
+    name: useRef<HTMLInputElement>(null),
+    email: useRef<HTMLInputElement>(null),
+  }
+
+  const { toggle, isListening } = useSpeechInputWithCursor({
+    inputRef: inputRefs[activeField],
+    value: formData[activeField],
+    onChange: (value) => setFormData({ ...formData, [activeField]: value }),
+  })
+
+  return (
+    <form>
+      <input
+        ref={inputRefs.name}
+        value={formData.name}
+        onFocus={() => setActiveField('name')}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        placeholder="Name"
+      />
+      <input
+        ref={inputRefs.email}
+        value={formData.email}
+        onFocus={() => setActiveField('email')}
+        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        placeholder="Email"
+      />
+      <button type="button" onClick={toggle}>
+        {isListening ? '🔴 Stop' : '🎙️ Speak'}
+      </button>
+    </form>
+  )
+}
+```
+
+### Real-time Transcript Display
+
+```tsx
+import { useSpeechInput } from '@syntropy-labs/react-web-speech'
+
+function LiveTranscript() {
+  const { transcript, interimTranscript, isListening, toggle } = useSpeechInput({
+    interimResults: true,
+    continuous: true,
+  })
+
+  return (
+    <div>
+      <button onClick={toggle}>{isListening ? 'Stop' : 'Start'}</button>
+      <p>
+        {transcript}
+        <span style={{ opacity: 0.5 }}>{interimTranscript}</span>
+      </p>
+    </div>
+  )
+}
+```
+
+---
+
+## Troubleshooting
+
+### "Permission denied" error
+
+The user has denied microphone access. They need to:
+1. Click the 🔒 icon in the browser address bar
+2. Reset microphone permissions
+3. Refresh the page
+
+### "Network error"
+
+The Web Speech API requires an internet connection. Chrome sends audio to Google's servers for processing.
+
+### Recognition stops immediately
+
+Some browsers stop recognition after detecting silence. Solutions:
+- Use `continuous: true` for longer sessions
+- Increase `silenceTimeout` (or set to `0` to disable)
+
+### Works in development but not production
+
+The Web Speech API requires HTTPS. Make sure your production site uses SSL.
+
+### Duplicate React error with yarn link
+
+When testing locally with `yarn link`, add React aliases to your Vite config:
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+import path from 'path'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      react: path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom'),
+    },
+  },
+})
+```
+
+---
+
 ## Why This Package?
 
 Existing React speech-to-text packages lack critical production-ready features:
@@ -225,4 +399,5 @@ yarn build
 ## License
 
 MIT © [SyntropyLabs](https://github.com/SyntropyLabs)
+
 

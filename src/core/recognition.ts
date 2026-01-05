@@ -37,11 +37,24 @@ const ERROR_MESSAGES: Record<SpeechErrorType, string> = {
 }
 
 /**
- * Create a configured SpeechRecognition instance
+ * Create a configured SpeechRecognition instance.
  *
  * @param options - Recognition configuration options
- * @param callbacks - Event callbacks
+ * @param callbacks - Event callbacks for recognition events
  * @returns Configured recognition instance, or null if not supported
+ * @example
+ * ```ts
+ * const recognition = createRecognitionInstance(
+ *   { lang: 'en-US', continuous: false },
+ *   {
+ *     onResult: (text, isFinal) => console.log(text),
+ *     onError: (err) => console.error(err),
+ *     onStart: () => console.log('Started'),
+ *     onEnd: () => console.log('Ended'),
+ *   }
+ * )
+ * recognition?.start()
+ * ```
  */
 export function createRecognitionInstance(
   options: RecognitionOptions,

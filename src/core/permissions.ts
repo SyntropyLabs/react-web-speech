@@ -2,10 +2,17 @@ import type { MicPermissionState } from '../types'
 import { detectBrowserCapabilities } from './browser'
 
 /**
- * Get the current microphone permission state
- * Uses Permissions API when available, falls back to 'prompt'
+ * Get the current microphone permission state.
+ * Uses Permissions API when available, falls back to 'prompt'.
  *
  * @returns Promise resolving to permission state
+ * @example
+ * ```ts
+ * const state = await getMicPermissionState()
+ * if (state === 'denied') {
+ *   alert('Please enable microphone access')
+ * }
+ * ```
  */
 export async function getMicPermissionState(): Promise<MicPermissionState> {
   const { isSupported, supportsPermissionsAPI } = detectBrowserCapabilities()
@@ -73,10 +80,17 @@ export function subscribeToPermissionChanges(
 }
 
 /**
- * Request microphone permission by attempting to access the device
- * This triggers the browser's permission prompt
+ * Request microphone permission by attempting to access the device.
+ * This triggers the browser's permission prompt.
  *
  * @returns Promise resolving to the new permission state
+ * @example
+ * ```ts
+ * const state = await requestMicPermission()
+ * if (state === 'granted') {
+ *   console.log('Microphone access granted!')
+ * }
+ * ```
  */
 export async function requestMicPermission(): Promise<MicPermissionState> {
   const { isSupported } = detectBrowserCapabilities()
